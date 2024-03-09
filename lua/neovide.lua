@@ -1,6 +1,6 @@
 if vim.g.neovide then
 	-- set font
-	vim.o.guifont = "DejaVuSansM Nerd Font Mono:h22"
+	vim.o.guifont = "DejaVuSansM Nerd Font Mono:h20"
 	vim.g.neovide_fullscreen = false
 	vim.g.neovide_remember_window_size = true
 	-- Hiding the mouse when typing
