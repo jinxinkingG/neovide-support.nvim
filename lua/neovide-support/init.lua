@@ -1,9 +1,20 @@
-local config = require('neovide-support.config')
 local M = {}
-M.setup = config.setup
-function M.load(opts)
-	config.setup(opts)
-	opts = require('neovide-support.config').extend(opts)
+
+M.defaults = {
+	refresh_rate = 60,
+	fullscreen = false,
+	remember_window_size = true,
+	font = 'FiraMono Nerd Font,DejaVuSansM Nerd Font:h18'
+}
+function M.extend(opts)
+	return opts and vim.tbl_deep_extend("force", {}, M.options, opts) or M.options
+end
+
+M.options = nil
+
+function M.config(options)
+	M.options = vim.tbl_deep_extend("force", {}, M.defaults, options or {})
+	local opts = require('neovide-support.config').extend(options)
 	if vim.loop.os_uname().sysname == "Windows_NT" then
 		vim.g.neovide_title_background_color =
 				string.format("%x", vim.api.nvim_get_hl(0, { id = vim.api.nvim_get_hl_id_by_name("Normal") }).bg)
