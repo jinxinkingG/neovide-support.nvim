@@ -1,6 +1,10 @@
 if vim.g.neovide then
+	if vim.loop.os_uname().sysname == "Windows_NT" then
+		vim.g.neovide_title_background_color =
+			string.format("%x", vim.api.nvim_get_hl(0, { id = vim.api.nvim_get_hl_id_by_name("Normal") }).bg)
+	end
 	-- set font
-	vim.o.guifont = "DejaVuSansM Nerd Font:h18"
+	vim.o.guifont = "FiraMono Nerd Font,DejaVuSansM Nerd Font:h18"
 	vim.g.neovide_fullscreen = false
 	vim.g.neovide_remember_window_size = true
 	-- Hiding the mouse when typing
