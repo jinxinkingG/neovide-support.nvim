@@ -1,3 +1,3 @@
 if vim.g.neovide then
-  require("neovide")
+  require("neovide-support").load()
 end

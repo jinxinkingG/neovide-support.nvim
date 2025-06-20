@@ -1,13 +1,20 @@
-if vim.g.neovide then
+local config = require('neovide-support.config')
+local M = {}
+M.setup = config.setup
+function M.load(opts)
+	config.setup(opts)
+	opts = require('neovide-support.config').extend(opts)
 	if vim.loop.os_uname().sysname == "Windows_NT" then
 		vim.g.neovide_title_background_color =
 				string.format("%x", vim.api.nvim_get_hl(0, { id = vim.api.nvim_get_hl_id_by_name("Normal") }).bg)
 		vim.g.neovide_title_text_color = "pink"
+	else
 	end
 	-- set font
-	vim.o.guifont = "FiraMono Nerd Font,DejaVuSansM Nerd Font:h18"
-	vim.g.neovide_fullscreen = false
-	vim.g.neovide_remember_window_size = true
+	vim.g.neovide_refresh_rate = opts.refresh_rate
+	vim.o.guifont = opts.font
+	vim.g.neovide_fullscreen = opts.fullscreen
+	vim.g.neovide_remember_window_size = opts.remember_window_size
 	-- Hiding the mouse when typing
 	vim.g.neovide_hide_mouse_when_typing = true
 	-- Underline automatic scaling
@@ -15,7 +22,6 @@ if vim.g.neovide then
 	-- Theme
 	vim.g.neovdie_theme = "auto"
 	-- Refresh Rate
-	vim.g.neovide_refresh_rate = 75
 	vim.g.neovide_refresh_rate_idle = 5
 	-- Cursor animation length
 	vim.g.neovide_cursor_animation_length = 0.05
@@ -39,3 +45,5 @@ if vim.g.neovide then
 	vim.api.nvim_set_keymap("t", "<C-v>", "<C-R>+", { noremap = true, silent = true })
 	vim.api.nvim_set_keymap("v", "<C-v>", "<C-R>+", { noremap = true, silent = true })
 end
+
+return M
