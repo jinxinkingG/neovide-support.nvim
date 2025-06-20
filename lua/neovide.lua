@@ -2,6 +2,7 @@ if vim.g.neovide then
 	if vim.loop.os_uname().sysname == "Windows_NT" then
 		vim.g.neovide_title_background_color =
 			string.format("%x", vim.api.nvim_get_hl(0, { id = vim.api.nvim_get_hl_id_by_name("Normal") }).bg)
+		vim.g.neovide_title_text_color = "pink"
 	end
 	-- set font
 	vim.o.guifont = "FiraMono Nerd Font,DejaVuSansM Nerd Font:h18"
