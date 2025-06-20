@@ -13,7 +13,7 @@ function M.load(opts)
 	-- set font
 	vim.g.neovide_refresh_rate = opts.refresh_rate
 	vim.o.guifont = opts.font
-	vim.g.neovide_fullscreen = opts.fullscreen
+	vim.g.neovide_fullscreen = true
 	vim.g.neovide_remember_window_size = opts.remember_window_size
 	-- Hiding the mouse when typing
 	vim.g.neovide_hide_mouse_when_typing = true
