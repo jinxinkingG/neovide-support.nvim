@@ -1,7 +1,6 @@
 local config = require('neovide-support.config')
-local M = {}
 
-M.options = nil
+local M = {}
 
 M.setup = config.setup
 
