@@ -27,8 +27,7 @@ M.defaults = {
 }
 
 function M.setup(options)
-	M.options = vim.tbl_deep_extend("force", {}, M.defaults, options or {})
-	local opts = M.options
+	local opts = vim.tbl_deep_extend("force", {}, M.options, options or {})
 	if vim.loop.os_uname().sysname == "Windows_NT" then
 		vim.g.neovide_title_background_color =
 				string.format("%x", vim.api.nvim_get_hl(0, { id = vim.api.nvim_get_hl_id_by_name("Normal") }).bg)
