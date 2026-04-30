@@ -1,8 +1,6 @@
 local M = {}
 
-M.options = nil
-
-M.defaults = {
+M.options = {
 	refresh_rate = 60,
 	fullscreen = false,
 	remember_window_size = true,
@@ -25,14 +23,6 @@ M.defaults = {
 	cursor_vfx_particle_lifetime = 0.6,
 	clipboard = "unnamedplus",
 }
-
-setmetatable(M, {
-	__index = function(_, k)
-		if k == "options" then
-			return M.defaults
-		end
-	end,
-})
 
 function M.setup(options)
 	local opts = vim.tbl_deep_extend("force", {}, M.options, options or {})
