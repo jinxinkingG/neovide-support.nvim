@@ -23,14 +23,22 @@ M.defaults = {
 	cursor_vfx_opacity = 80.0,
 	-- Particle config
 	cursor_vfx_particle_lifetime = 0.6,
-	clipboard = "unnamedplus"
+	clipboard = "unnamedplus",
 }
+
+setmetatable(M, {
+	__index = function(_, k)
+		if k == "options" then
+			return M.defaults
+		end
+	end,
+})
 
 function M.setup(options)
 	local opts = vim.tbl_deep_extend("force", {}, M.options, options or {})
 	if vim.loop.os_uname().sysname == "Windows_NT" then
 		vim.g.neovide_title_background_color =
-				string.format("%x", vim.api.nvim_get_hl(0, { id = vim.api.nvim_get_hl_id_by_name("Normal") }).bg)
+			string.format("%x", vim.api.nvim_get_hl(0, { id = vim.api.nvim_get_hl_id_by_name("Normal") }).bg)
 		vim.g.neovide_title_text_color = "pink"
 	end
 	-- set font
@@ -57,11 +65,11 @@ function M.setup(options)
 	-- Particle config
 	vim.g.neovide_cursor_vfx_particle_lifetime = opts.cursor_vfx_praticle_lifetime
 	vim.o.clipboard = opts.clipboard
-	vim.keymap.set("n", "<C-s>", ":w<CR>")     -- Save
-	vim.keymap.set("v", "<C-c>", '"+y')        -- Copy
-	vim.keymap.set("n", "<C-v>", '"+P')        -- Paste normal mode
-	vim.keymap.set("v", "<C-v>", '"+P')        -- Paste visual mode
-	vim.keymap.set("c", "<C-v>", "<C-R>+")     -- Paste command mode
+	vim.keymap.set("n", "<C-s>", ":w<CR>") -- Save
+	vim.keymap.set("v", "<C-c>", '"+y') -- Copy
+	vim.keymap.set("n", "<C-v>", '"+P') -- Paste normal mode
+	vim.keymap.set("v", "<C-v>", '"+P') -- Paste visual mode
+	vim.keymap.set("c", "<C-v>", "<C-R>+") -- Paste command mode
 	vim.keymap.set("i", "<C-v>", '<ESC>l"+Pli') -- Paste insert mode
 	vim.api.nvim_set_keymap("", "<C-v>", "+p<CR>", { noremap = true, silent = true })
 	vim.api.nvim_set_keymap("!", "<C-v>", "<C-R>+", { noremap = true, silent = true })
@@ -72,13 +80,5 @@ end
 function M.extend(opts)
 	return opts and vim.tbl_deep_extend("force", {}, M.options, opts) or M.options
 end
-
-setmetatable(M, {
-	__index = function(_, k)
-		if k == "options" then
-			return M.defaults
-		end
-	end
-})
 
 return M
