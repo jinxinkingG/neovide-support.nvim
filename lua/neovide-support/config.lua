@@ -1,4 +1,3 @@
-@ -1,84 +0,0 @@
 local M = {}
 
 M.options = nil
